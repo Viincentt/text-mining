@@ -1,7 +1,9 @@
+Build System:
+    Cmake
 
-Cmake
-Instruments
-qcachegrind/kcachegrind
+Profiling:
+    Instruments
+    qcachegrind/kcachegrind
 
 Create dictionnary:
     ???
@@ -11,3 +13,6 @@ Search:
     mmap
     Damerau-Levenshtein
     (Bloom Filter)
+
+Misc:
+    boost::options
