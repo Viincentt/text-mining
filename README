@@ -18,13 +18,20 @@ Profiling:
     qcachegrind/kcachegrind
 
 Patricia trie creation:
+=======================
     ???
     
 Search engine:
+==============
     mmap
     Damerau-Levenshtein
     (Bloom Filter)
 
 Misc:
+=====
     option parser: boost::options ? 
     N-gram ?
+
+TODO:
+=====
+    AUTHORS
