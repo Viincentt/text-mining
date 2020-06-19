@@ -35,3 +35,12 @@ Misc:
 TODO:
 =====
     AUTHORS
+
+Execution:
+==========
+mkdir build
+cd build
+cmake ..
+make
+./TextMiningCompiler words.txt my_dict.bin
+./TextMiningApp my_dict.bin
