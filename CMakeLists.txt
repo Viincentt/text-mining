@@ -1,15 +1,16 @@
 cmake_minimum_required(VERSION 3.0)
 project (textmining)
 
+
  if (NOT CMAKE_BUILD_TYPE)
-     set(CMAKE_BUILD_TYPE Release)
-    endif()
+     set(CMAKE_BUILD_TYPE Debug)
+ endif()
 #[[INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})]]
 add_compile_options(-pedantic -Werror -Wall -Wextra -std=c++17)
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -fsanitize=address")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Ofast -march=native")
 
-set(TRIE "src/trie/trie.cc")
+file(GLOB TRIE "src/trie/*.cc")
 file(GLOB SOURCES_COMPILER "src/compiler/*.cc")
 file(GLOB SOURCES_APP "src/app/*.cc")
 
