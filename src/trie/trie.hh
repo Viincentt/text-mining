@@ -3,36 +3,25 @@
 #include <optional>
 #include <memory>
 #include <iostream>
-
-class trie{
+#include <vector>
+/*
+class pTrie{
     public:
-        trie() = default;
-        void add(std::string s, int freq, int i, int len);
-        void print(int i);
-    private:
-        std::optional<int> f;
-        std::map<char, std::shared_ptr<trie>> children;
+        pTrie(std::string s);
+        pTrie(std::string s, int f);
+        void add(std::string s, int f, int i, int len);
+        std::string s;
+        int freq;
+        std::vector<std::shared_ptr<pTrie>> children;
 };
-
-class PTrie {
-    public:
-    class Node {
-        public:
-            Node();
-            Node(int freq);
-            void add(std::string s, int freq, size_t i, size_t len);
-            void print(int i);
-            int nbWords();
-        private:
-            std::optional<int> f;
-            std::map<std::string, std::shared_ptr<Node>> children;
-    };
+*/
+class PTrie
+{
+public:
     PTrie();
-    void add(std::string s, size_t freq);
-    void print();
-    bool checkNbWords();
-    std::shared_ptr<Node> getRoot();
-    private:
-        std::shared_ptr<Node> root;
-        int nbWords;
+    PTrie(int freq);
+    void add(std::string s, int freq, size_t i, size_t len);
+    void print(int i);
+    int f;
+    std::map<std::string, PTrie> children;
 };
