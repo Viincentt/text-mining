@@ -12,17 +12,18 @@ int main(int argc, char const *argv[])
     */
     if (argc != 3)
         return 1;
-
     std::ifstream words(argv[1]);
     std::string word;
     int freq;
-    auto root = std::make_shared<trie>();
+    auto trie = std::make_shared<PTrie>();
     while (words >> word) {
         words >> freq;
-        root->add(word, freq, 0, word.size());
+        trie->add(word, freq);
     }
     words.close();
-    root->print(0);
+    // trie->print();
+    // trie->checkNbWords();
+    // std::cout << "Size of Structure: " << sizeof(*(trie->getRoot())) << "\n";
     // std::ofstream out(argv[2], std::ios::out | std::ios::binary);
     // TODO binariser l'arbre ???
     return 0;
