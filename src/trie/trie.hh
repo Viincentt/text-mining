@@ -4,6 +4,7 @@
 #include <memory>
 #include <iostream>
 #include <vector>
+#include <fstream>
 /*
 class pTrie{
     public:
@@ -15,8 +16,8 @@ class pTrie{
         std::vector<std::shared_ptr<pTrie>> children;
 };
 */
-class PTrie
-{
+
+class PTrie {
 public:
     PTrie();
     PTrie(int freq);
@@ -25,3 +26,5 @@ public:
     int f;
     std::map<std::string, PTrie> children;
 };
+void compile(std::ofstream& out, PTrie root);
+PTrie load(std::ifstream& input);
