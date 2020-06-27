@@ -16,7 +16,7 @@ file(GLOB SOURCES_APP "src/app/*.cc")
 
 
 add_executable(TextMiningCompiler ${TRIE} ${SOURCES_COMPILER})
-add_executable(TextMiningApp ${SOURCES_APP})
+add_executable(TextMiningApp ${TRIE} ${SOURCES_APP})
 #[[
     TARGET_LINK_LIBRARIES(chessengine ${Boost_LIBRARIES}
             dl)
