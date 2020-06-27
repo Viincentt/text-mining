@@ -43,4 +43,6 @@ cd build
 cmake ..
 make
 ./TextMiningCompiler words.txt my_dict.bin
-./TextMiningApp my_dict.bin
+WARNING use printf instead on echo on macOS for several request at the same
+time
+printf "approx 0 test\napprox 1 test\napprox 2 test\napprox 3 test\napprox 4 test" | ./TextMiningApp my_dict.bin
