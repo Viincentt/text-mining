@@ -17,15 +17,16 @@ Profiling:
     Instruments
     qcachegrind/kcachegrind
 
-Patricia trie creation:
-=======================
-    ???
-    
+Patricia trie
+=============
+{
+    int freq = -1;
+    map<string, Ptrie> children;
+}
+
 Search engine:
 ==============
-    mmap
     Damerau-Levenshtein
-    (Bloom Filter)
 
 Misc:
 =====
