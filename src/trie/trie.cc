@@ -13,7 +13,7 @@ PTrie::PTrie()
 {}
 
 // Print
-void PTrie::print(int i) {
+void PTrie::print(int i) const {
     for (auto j = 0; j < i; ++j)
         std::cout << "    ";
     if (children.size() > 0)

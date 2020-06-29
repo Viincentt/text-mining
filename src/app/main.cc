@@ -2,8 +2,8 @@
 #include <fstream>
 #include <set>
 #include <map>
-#include <algorithm>
 #include <vector>
+#include <err.h>
 #include "../trie/trie.hh"
 
 int DLevenshtein(std::string anchor, std::string test) {
@@ -29,7 +29,6 @@ int DLevenshtein(std::string anchor, std::string test) {
     }
     return d[anchorSize][testSize];
 }
-
 void rec(const PTrie& root, const std::string& s, const int& dist, std::map<int, std::map<int, std::set<std::string>>>& m, std::string cur) {
     if (root.f != -1) {
         auto d = DLevenshtein(s, cur);
@@ -58,9 +57,8 @@ void print(std::map<int, std::map<int, std::set<std::string>>> res) {
     }
     for (const auto& dist: res) {
         for (auto freq = dist.second.rbegin(); freq != dist.second.rend(); ++freq) {
-            for (const auto& word: freq->second) {
+            for (const auto& word: freq->second)
                 std::cout << ",{\"word\":\"" << word << "\",\"freq\":" << freq->first << ",\"distance\":" << dist.first << "}"; 
-            }
         }
     }
     std::cout << "]\n";
@@ -68,19 +66,19 @@ void print(std::map<int, std::map<int, std::set<std::string>>> res) {
 
 int main(int argc, char const *argv[])
 {
-    if (argc != 2) // TODO gestion d'erreur
-        return 1;
+    if (argc < 2) 
+        errx(1, "Usage ./TextMiningApp /path/to/dict.bin");
 
-    auto input = std::ifstream(argv[1]);
+    auto input = std::ifstream(argv[1], std::ios::binary);
     const PTrie t = load(input);
+    input.close();
 
     std::string approx;
     int dist;
     std::string word;
 
-    for (; std::cin >> approx && approx == "approx" && std::cin >> dist && std::cin >> word;) {
-        dist = dist >= 0 ? dist : 0;
+    for (; std::cin >> approx && approx == "approx" && std::cin >> dist && std::cin >> word;)
         print(findWords(t, word, dist));
-    }
+
     return 0;
 }
