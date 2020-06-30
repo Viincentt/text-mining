@@ -3,7 +3,7 @@ project (textmining)
 
 
  if (NOT CMAKE_BUILD_TYPE)
-     set(CMAKE_BUILD_TYPE Debug)
+     set(CMAKE_BUILD_TYPE Release)
  endif()
 #[[INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})]]
 add_compile_options(-pedantic -Werror -Wall -Wextra -std=c++17)
