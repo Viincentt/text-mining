@@ -1,21 +1,47 @@
 Questions:
 ==========
  1.	Décrivez les choix de design de votre programme
+ On a choisi le C++, notamment pour utiliser les differents containers offert par la STL.
+ Les clés se situent au niveau des arrêtes du Patricia trie.
+
  2.	Listez l’ensemble des tests effectués sur votre programme (en plus des units tests)
+Test suite fonctionnel avec generation aleatoire de requetes et un fichier contenant 100 requetes.
+On aurait bien voulu mettre en place une CI, mais on s'en est apercu a la fin.
+
  3.	Avez-vous détecté des cas où la correction par distance ne fonctionnait pas (même avec une distance élevée) ?
+ Non. Par contre, la ref a l'air de crash sur un ficher avec 100 mots pris
+ aleatoirement.
+    
+
  4.	Quelle est la structure de données que vous avez implémentée dans votre projet, pourquoi ?
+class PTrie {
+    int frequence;
+    std::map<std::string, PTrie> children;
+}
+
  5.	Proposez un réglage automatique de la distance pour un programme qui prend juste une chaîne de caractères en entrée, donner le processus d’évaluation ainsi que les résultats
+
+Si longueur du mot < 4: 
+    Autoriser une distance de 1, puis prendre le mot ayant la plus grande frequence parmi ceux proposer.
+Sinon si longueur du mot < 7: 
+    Autoriser une distance de 2, puis prendre le mot ayant la plus grande frequence parmi ceux proposer.
+Sinon: 
+    Autoriser une distance de 3, puis prendre le mot ayant la plus grande frequence parmi ceux proposer.
+
  6.	Comment comptez vous améliorer les performances de votre programme
+ - Ne pas parcourir tout le Patricia Trie (pruning?)
+ - Alleger la strucure 
+    class PTrie {
+        int frequence;
+        std::string key;
+        std::vector<PTrie> children;
+    }
+
  7.	Que manque-t-il à votre correcteur orthographique pour qu’il soit à l’état de l’art ?
 
 Build System:
 =============
     Cmake
-
-Profiling:
-==========
-    Instruments
-    qcachegrind/kcachegrind
 
 Patricia trie
 =============
@@ -28,22 +54,16 @@ Search engine:
 ==============
     Damerau-Levenshtein
 
-Misc:
-=====
-    option parser: boost::options ? 
-    N-gram ?
-
-TODO:
-=====
-    AUTHORS
-
 Execution:
 ==========
 mkdir build
 cd build
 cmake ..
 make
-./TextMiningCompiler words.txt my_dict.bin
-WARNING use printf instead on echo on macOS for several request at the same
-time
-printf "approx 0 test\napprox 1 test\napprox 2 test\napprox 3 test\napprox 4 test" | ./TextMiningApp my_dict.bin
+./TextMiningCompiler words.txt words.bin
+WARNING use printf instead on echo on macOS for several request at the same time
+printf "approx 0 test\napprox 1 test\napprox 2 test\napprox 3 test\napprox 4 test" | ./TextMiningApp words.bin
+
+Test:
+=====
+python3 test.py
