@@ -1,5 +1,7 @@
 #include "trie.hh"
 
+
+// Dumping Patricia Trie 
 void compile(std::ofstream& out, PTrie root)
 {
     out.write(reinterpret_cast<char *>(&root.f), sizeof(root.f));
@@ -14,6 +16,7 @@ void compile(std::ofstream& out, PTrie root)
     }
 }
 
+// Loading Patricia Trie
 PTrie load(std::ifstream& input)
 {
     int freq;
