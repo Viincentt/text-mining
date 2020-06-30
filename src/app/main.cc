@@ -6,7 +6,8 @@
 #include <err.h>
 #include "../trie/trie.hh"
 
-int DLevenshtein(std::string anchor, std::string test) {
+// Damerau-Levenshtein
+int DLevenshtein(const std::string& anchor, const std::string& test) {
     auto anchorSize = anchor.size();
     auto testSize = test.size();
     // TODO boost matrix
@@ -29,7 +30,9 @@ int DLevenshtein(std::string anchor, std::string test) {
     }
     return d[anchorSize][testSize];
 }
-void rec(const PTrie& root, const std::string& s, const int& dist, std::map<int, std::map<int, std::set<std::string>>>& m, std::string cur) {
+
+// DFS of Patricia trie
+void rec(const PTrie& root, const std::string& s, const int& dist, std::map<int, std::map<int, std::set<std::string>>>& m, const std::string& cur) {
     if (root.f != -1) {
         auto d = DLevenshtein(s, cur);
         if (d <= dist)
@@ -41,12 +44,13 @@ void rec(const PTrie& root, const std::string& s, const int& dist, std::map<int,
 
 std::map<int, std::map<int, std::set<std::string>>> findWords(const PTrie& root, const std::string& s, const int& dist) {
     std::map<int, std::map<int, std::set<std::string>>> res;
+    // std::string buf;
     rec(root, s, dist, res, ""); 
     return res;
 }
 
+// Print result as json
 void print(std::map<int, std::map<int, std::set<std::string>>> res) {
-
     std::cout << "[";
     if (res.size() >= 1) {
         auto dist = res.begin();
@@ -77,8 +81,8 @@ int main(int argc, char const *argv[])
     int dist;
     std::string word;
 
-    for (; std::cin >> approx && approx == "approx" && std::cin >> dist && std::cin >> word;)
+    for (; std::cin >> approx && approx == "approx" && std::cin >> dist && std::cin >> word;) {
         print(findWords(t, word, dist));
-
+    }
     return 0;
 }
