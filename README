@@ -49,4 +49,5 @@ printf "approx 0 test\napprox 1 test\napprox 2 test\napprox 3 test\napprox 4 tes
 
 Test:
 =====
+!!! One need to compile the words as words.bin in order to run the tests" !!!
 python3 test.py
