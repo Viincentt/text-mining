@@ -6,7 +6,6 @@ approx 4 recess
 approx 6 labored
 approx 0 tested
 approx 3 event
-approx 8 foregoing
 approx 1 door
 approx 0 wiggly
 approx 5 regret
@@ -89,7 +88,6 @@ approx 4 thoughtful
 approx 3 icky
 approx 0 hungry
 approx 3 ritzy
-approx 8 worthless
 approx 5 paddle
 approx 2 merciful
 approx 5 suppose
