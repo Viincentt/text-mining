@@ -7,7 +7,7 @@ from string import ascii_letters
 
 class TestTextMining(unittest.TestCase):
     def test_compileOneWord(self):
-        command = "../build/TextMiningCompiler ../words/one_word.txt ../build/one_word.bin".split()
+        command = "../build/TextMiningCompiler ../words/one_word.txt ../build/words.bin".split()
         popen = subprocess.run(command, capture_output=True)
         self.assertEqual(popen.returncode, 0)
 
@@ -36,7 +36,7 @@ class TestTextMining(unittest.TestCase):
 
     def test_appOneWord(self):
         approx = "approx 0 n936"
-        command = "../build/TextMiningApp ../build/one_word.bin".split()
+        command = "../build/TextMiningApp ../build/words.bin".split()
         popen = subprocess.run(command, input=approx, capture_output=True, text=True)
         self.assertEqual(popen.stdout, "[{\"word\":\"n936\",\"freq\":705,\"distance\":0}]\n")
 
