@@ -13,7 +13,7 @@ Contraintes:
  * au minimum 3000 qps/core en distance = 0 (2,7 GHz Intel Core i7, 1 seul core)
  * au minimum 300 qps/core en distance = 1
  * au minimum 30 qps/core en distance = 2
- * les programmes ne doivent jamais consommer plus de 512M de RAM
+ * le programme TextMiningApp ne doit jamais consommer plus de 512M de RAM (pas de limite pour TextMiningCompiler)
  * Langages autorisés: C/C++ (boost autorisé, précisé la version dans le fichier README), Java, autre (avec explications/justification dans le README)
  * Autotools ou CMake si C/C++; Ant si Java; autre (avec justification et explications dans le README)
 
