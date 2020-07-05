@@ -1,8 +1,17 @@
 #include <string>
 #include <map>
+#include <vector>
 #include <iostream>
 #include <fstream>
 
+class FTrie {
+    public:
+        FTrie(int freq, std::string key);
+        void print(int i) const;
+        int freq;
+        std::string key;
+        std::vector<FTrie> children;
+};
 class PTrie {
 public:
     PTrie();
@@ -13,5 +22,5 @@ public:
     std::map<std::string, PTrie> children;
 };
 
-void compile(std::ofstream& out, PTrie root);
-PTrie load(std::ifstream& input);
+FTrie load(std::ifstream& input);
+void compile(std::ofstream& out, PTrie root, std::string key);

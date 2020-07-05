@@ -12,6 +12,12 @@ PTrie::PTrie()
     children(std::map<std::string, PTrie>())
 {}
 
+FTrie::FTrie(int freq, std::string key) 
+    : freq(freq),
+    key(key),
+    children(std::vector<FTrie>())
+{}
+
 // Print
 void PTrie::print(int i) const {
     for (auto j = 0; j < i; ++j)
@@ -32,6 +38,18 @@ void PTrie::print(int i) const {
         it->second.print(i + 1);
 }
 
+void FTrie::print(int i) const {
+    for (auto j = 0; j < i; ++j) 
+        std::cout << "   ";
+    std::cout << "key: " << key;
+    if (freq != -1)
+        std::cout << " frequence: " << freq;
+    std::cout << "\n";
+    for (const auto& child: children) {
+        child.print(++i);
+    }
+}
+
 // Add
 void PTrie::add(std::string s, int freq, size_t i, size_t len)
 {
@@ -46,7 +64,7 @@ void PTrie::add(std::string s, int freq, size_t i, size_t len)
         if (best_fit.has_value())
         {
             auto keySize = best_fit.value()->first.size();
-            if (s.substr(i, keySize) == best_fit.value()->first) // matching branch is fully contained in the inserting word
+            if (s.substr(i, keySize) == best_fit.value()->first) // key of matching branch is fully contained in the inserting word
             {
                 if (i + keySize < len)
                     best_fit.value()->second.add(s, freq, i + keySize, len);
