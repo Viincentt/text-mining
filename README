@@ -1,58 +1,41 @@
 Questions:
 ==========
  1.	Décrivez les choix de design de votre programme
- On a choisi le C++, notamment pour utiliser les differents containers offert par la STL.
- Les clés se situent au niveau des arrêtes du Patricia trie.
+ On a choisi le C++ comme langage, et Cmake comme Build System.
 
  2.	Listez l’ensemble des tests effectués sur votre programme (en plus des units tests)
 Test suite fonctionnel avec generation aleatoire de requetes et un fichier contenant 100 requetes.
 On aurait bien voulu mettre en place une CI, mais on s'en est apercu a la fin.
 
  3.	Avez-vous détecté des cas où la correction par distance ne fonctionnait pas (même avec une distance élevée) ?
- Non. Par contre, la ref a l'air de crash sur un ficher avec 100 mots pris
- aleatoirement.
-    
+ Non. Par contre, la ref a l'air de crash sur des requetes avec une distance >= 8.
 
  4.	Quelle est la structure de données que vous avez implémentée dans votre projet, pourquoi ?
+Lors de la compilation nous avons utilise cette structure:
 class PTrie {
     int frequence;
     std::map<std::string, PTrie> children;
 }
+Lors de la recherche, nous avons changer la structure pour en avoir une moins couteuse.
+class FTrie {
+    int frequence;
+    std::string key;
+    std::vector<FTrie> children;
+}
 
  5.	Proposez un réglage automatique de la distance pour un programme qui prend juste une chaîne de caractères en entrée, donner le processus d’évaluation ainsi que les résultats
-
 Si longueur du mot < 4: 
-    Autoriser une distance de 1, puis prendre le mot ayant la plus grande frequence parmi ceux proposer.
+    Autoriser une distance de 1.
 Sinon si longueur du mot < 7: 
-    Autoriser une distance de 2, puis prendre le mot ayant la plus grande frequence parmi ceux proposer.
+    Autoriser une distance de 2.
 Sinon: 
-    Autoriser une distance de 3, puis prendre le mot ayant la plus grande frequence parmi ceux proposer.
+    Autoriser une distance de 3.
 
  6.	Comment comptez vous améliorer les performances de votre programme
  - Ne pas parcourir tout le Patricia Trie (pruning?)
- - Alleger la strucure 
-    class PTrie {
-        int frequence;
-        std::string key;
-        std::vector<PTrie> children;
-    }
 
  7.	Que manque-t-il à votre correcteur orthographique pour qu’il soit à l’état de l’art ?
-
-Build System:
-=============
-    Cmake
-
-Patricia trie
-=============
-{
-    int freq = -1;
-    map<string, Ptrie> children;
-}
-
-Search engine:
-==============
-    Damerau-Levenshtein
+Pas lu de papier malheureusement. :3
 
 Execution:
 ==========
@@ -60,8 +43,8 @@ mkdir build
 cd build
 cmake ..
 make
-./TextMiningCompiler words.txt words.bin
-WARNING use printf instead on echo on macOS for several request at the same time
+./TextMiningCompiler /path/to/words.txt words.bin
+!!! WARNING Use printf instead on echo on macOS for several request at the same time !!!
 printf "approx 0 test\napprox 1 test\napprox 2 test\napprox 3 test\napprox 4 test" | ./TextMiningApp words.bin
 
 Test:
