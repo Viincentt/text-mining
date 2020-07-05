@@ -18,7 +18,7 @@ int main(int argc, char const *argv[])
         trie.add(word, freq, 0, word.size());
     words.close();
     std::ofstream out(argv[2], std::ios::binary);
-    compile(out, trie);
+    compile(out, trie, std::string(""));
     out.close();
     return 0;
 }
